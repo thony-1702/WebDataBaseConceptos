@@ -27,15 +27,15 @@
                 <div>
                     <div class="card">
                         <h3><i class="fas fa-table"></i> Tabla</h3>
-                        <p>Contenedor principal de datos sobre un tema (ej: Clientes).</p>
+                        <p>Contenedor principal de datos sobre un tema (ej: Clientes). Es la estructura donde se organiza la información.</p>
                     </div>
                     <div class="card border-blue">
                         <h3>Columna (Campo)</h3>
-                        <p>Vertical. Define el tipo de dato (Nombre, Edad).</p>
+                        <p>Es la unidad vertical. Define el <strong>tipo de dato</strong> (texto, número, fecha) que se almacenará. Representa los atributos del objeto.</p>
                     </div>
                     <div class="card border-red">
                         <h3>Fila (Registro)</h3>
-                        <p>Horizontal. Un ítem único (Juan Pérez).</p>
+                        <p>Es la unidad horizontal. Representa una instancia única o un ítem individual dentro de la tabla (ej: Un cliente específico).</p>
                     </div>
                 </div>
 
@@ -70,27 +70,27 @@
                 <div>
                     <div class="card-yellow">
                         <h3><i class="fas fa-key"></i> Primary Key (PK)</h3>
-                        <p>Identificador único e irrepetible (DNI del registro).</p>
+                        <p>Es el identificador único de cada fila. Garantiza que no haya registros duplicados. No puede ser nulo (vacío).</p>
                     </div>
                     <div class="card-green">
                         <h3><i class="fas fa-link"></i> Foreign Key (FK)</h3>
-                        <p>Conecta con la PK de otra tabla.</p>
+                        <p>Es un campo que apunta a la Primary Key de otra tabla. Es el "puente" que permite conectar dos tablas diferentes.</p>
                     </div>
                 </div>
 
                 <div class="relation-diagram">
                     <table class="data-table mini-table">
-                        <caption>AUTORES</caption>
+                        <caption>Tabla: AUTORES (Padre)</caption>
                         <tr><th>ID <span class="badge pk">PK</span></th><th>Nombre</th></tr>
                         <tr style="background:#fef3c7;"><td>101</td><td>Rowling</td></tr>
                     </table>
                     
                     <div class="arrow-connector">
-                        <span class="arrow-text">El 101 conecta aquí</span>
+                        <span class="arrow-text">El ID 101 viaja a la otra tabla</span>
                     </div>
 
                     <table class="data-table mini-table">
-                        <caption>LIBROS</caption>
+                        <caption>Tabla: LIBROS (Hijo)</caption>
                         <tr><th>ID</th><th>Título</th><th>AutorID <span class="badge fk">FK</span></th></tr>
                         <tr><td>1</td><td>Harry Potter</td><td style="background:#d1fae5;">101</td></tr>
                     </table>
@@ -98,36 +98,61 @@
             </div>
         </section>
 
-        <!-- 3. RELACIONES -->
+        <!-- 3. RELACIONES (CONTENIDO ACTUALIZADO) -->
         <section class="section-block">
             <h2 class="section-title">3. Tipos de Relaciones</h2>
             <div class="grid-3">
+                
+                <!-- Tarjeta 1 a 1 -->
                 <div class="rel-card">
                     <div class="rel-header bg-blue"><h3>1 : 1</h3><span>Uno a Uno</span></div>
                     <div class="rel-body">
-                        <div class="rel-icons"><i class="fas fa-user"></i> <i class="fas fa-passport"></i></div>
-                        <p class="rel-desc">Una persona, un pasaporte.</p>
+                        <div class="rel-icons"><i class="fas fa-user"></i> <i class="fas fa-id-card"></i></div>
+                        <p class="rel-concept"><strong>Concepto:</strong> Un registro en la Tabla A se relaciona con un solo registro en la Tabla B, y viceversa.</p>
+                        <hr class="separator">
+                        <p class="rel-desc">
+                            <strong>En la BD:</strong> Normalmente comparten la misma Llave Primaria o se coloca la Llave Foránea en cualquiera de las dos tablas con restricción "Unique".
+                            <br><br>
+                            <em>Ejemplo: Un empleado tiene un único archivo de antecedentes penales.</em>
+                        </p>
                     </div>
                 </div>
+
+                <!-- Tarjeta 1 a N -->
                 <div class="rel-card">
                     <div class="rel-header bg-indigo"><h3>1 : N</h3><span>Uno a Muchos</span></div>
                     <div class="rel-body">
-                        <div class="rel-icons"><i class="fas fa-user-tie"></i> <i class="fas fa-boxes"></i></div>
-                        <p class="rel-desc">Un cliente, muchos pedidos.</p>
+                        <div class="rel-icons"><i class="fas fa-user-tie"></i> <i class="fas fa-layer-group"></i></div>
+                        <p class="rel-concept"><strong>Concepto:</strong> Un registro en la Tabla A (Padre) se relaciona con múltiples registros en la Tabla B (Hijo).</p>
+                        <hr class="separator">
+                        <p class="rel-desc">
+                            <strong>En la BD:</strong> Es la relación más común. La Llave Foránea <strong>SIEMPRE</strong> se coloca en la tabla del lado "Muchos" (Tabla B).
+                            <br><br>
+                            <em>Ejemplo: Un cliente realiza muchos pedidos. (El ID del cliente se guarda en cada pedido).</em>
+                        </p>
                     </div>
                 </div>
+
+                <!-- Tarjeta N a M -->
                 <div class="rel-card">
                     <div class="rel-header bg-purple"><h3>N : M</h3><span>Muchos a Muchos</span></div>
                     <div class="rel-body">
-                        <div class="rel-icons"><i class="fas fa-users"></i> <i class="fas fa-book-open"></i></div>
-                        <p class="rel-desc">Muchos alumnos, muchas clases.</p>
+                        <div class="rel-icons"><i class="fas fa-users"></i> <i class="fas fa-graduation-cap"></i></div>
+                        <p class="rel-concept"><strong>Concepto:</strong> Varios registros de A se relacionan con varios de B.</p>
+                        <hr class="separator">
+                        <p class="rel-desc">
+                            <strong>En la BD:</strong> ¡No se puede hacer directamente! Se requiere crear una tercera tabla llamada <strong>Tabla Intermedia</strong> (o Pivote) que contenga las Llaves Foráneas de ambas tablas originales.
+                            <br><br>
+                            <em>Ejemplo: Estudiantes y Cursos. Se crea la tabla "Inscripciones" para unirlos.</em>
+                        </p>
                     </div>
                 </div>
+
             </div>
         </section>
 
     </div>
 
-    <footer>&copy; 2023 Conceptos DB</footer>
+    <footer>&copy; 2023 Conceptos DB - Guía Educativa</footer>
 </body>
 </html>

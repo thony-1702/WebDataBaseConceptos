@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos de Bases de Datos</title>
+    
+    <!-- CONEXIÓN AL CSS -->
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1><i class="fas fa-database"></i> Bases de Datos</h1>
+        <p>Conceptos fundamentales visualizados</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. TABLAS, FILAS Y COLUMNAS -->
+        <section class="section-block">
+            <h2 class="section-title">1. Estructura Básica</h2>
+            <div class="grid-2">
+                <div>
+                    <div class="card">
+                        <h3><i class="fas fa-table"></i> Tabla</h3>
+                        <p>Contenedor principal de datos sobre un tema (ej: Clientes).</p>
+                    </div>
+                    <div class="card border-blue">
+                        <h3>Columna (Campo)</h3>
+                        <p>Vertical. Define el tipo de dato (Nombre, Edad).</p>
+                    </div>
+                    <div class="card border-red">
+                        <h3>Fila (Registro)</h3>
+                        <p>Horizontal. Un ítem único (Juan Pérez).</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <h4 style="text-align:center; margin-bottom:10px;">Tabla: USUARIOS</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th class="highlight-col">Nombre <span class="label-tag tag-col">Columna</span></th>
+                                <th>Edad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td class="highlight-col">Ana</td><td>28</td></tr>
+                            <tr class="highlight-row">
+                                <td>2</td>
+                                <td class="highlight-col">Carlos <span class="label-tag tag-row">Fila</span></td>
+                                <td>35</td>
+                            </tr>
+                            <tr><td>3</td><td class="highlight-col">Luis</td><td>22</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. LLAVES -->
+        <section class="section-block">
+            <h2 class="section-title">2. Llaves (Keys)</h2>
+            <div class="grid-2">
+                <div>
+                    <div class="card-yellow">
+                        <h3><i class="fas fa-key"></i> Primary Key (PK)</h3>
+                        <p>Identificador único e irrepetible (DNI del registro).</p>
+                    </div>
+                    <div class="card-green">
+                        <h3><i class="fas fa-link"></i> Foreign Key (FK)</h3>
+                        <p>Conecta con la PK de otra tabla.</p>
+                    </div>
+                </div>
+
+                <div class="relation-diagram">
+                    <table class="data-table mini-table">
+                        <caption>AUTORES</caption>
+                        <tr><th>ID <span class="badge pk">PK</span></th><th>Nombre</th></tr>
+                        <tr style="background:#fef3c7;"><td>101</td><td>Rowling</td></tr>
+                    </table>
+                    
+                    <div class="arrow-connector">
+                        <span class="arrow-text">El 101 conecta aquí</span>
+                    </div>
+
+                    <table class="data-table mini-table">
+                        <caption>LIBROS</caption>
+                        <tr><th>ID</th><th>Título</th><th>AutorID <span class="badge fk">FK</span></th></tr>
+                        <tr><td>1</td><td>Harry Potter</td><td style="background:#d1fae5;">101</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. RELACIONES -->
+        <section class="section-block">
+            <h2 class="section-title">3. Tipos de Relaciones</h2>
+            <div class="grid-3">
+                <div class="rel-card">
+                    <div class="rel-header bg-blue"><h3>1 : 1</h3><span>Uno a Uno</span></div>
+                    <div class="rel-body">
+                        <div class="rel-icons"><i class="fas fa-user"></i> <i class="fas fa-passport"></i></div>
+                        <p class="rel-desc">Una persona, un pasaporte.</p>
+                    </div>
+                </div>
+                <div class="rel-card">
+                    <div class="rel-header bg-indigo"><h3>1 : N</h3><span>Uno a Muchos</span></div>
+                    <div class="rel-body">
+                        <div class="rel-icons"><i class="fas fa-user-tie"></i> <i class="fas fa-boxes"></i></div>
+                        <p class="rel-desc">Un cliente, muchos pedidos.</p>
+                    </div>
+                </div>
+                <div class="rel-card">
+                    <div class="rel-header bg-purple"><h3>N : M</h3><span>Muchos a Muchos</span></div>
+                    <div class="rel-body">
+                        <div class="rel-icons"><i class="fas fa-users"></i> <i class="fas fa-book-open"></i></div>
+                        <p class="rel-desc">Muchos alumnos, muchas clases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>&copy; 2023 Conceptos DB</footer>
+</body>
+</html>

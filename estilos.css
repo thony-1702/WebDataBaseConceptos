@@ -1,0 +1,309 @@
+/* =========================================
+   1. CONFIGURACIÓN BASE Y RESET
+   ========================================= */
+* {
+    box-sizing: border-box; /* El padding no aumenta el tamaño total */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6; /* Gris muy suave de fondo */
+    color: #1f2937; /* Gris oscuro para texto (no negro puro) */
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. ENCABEZADO (HEADER)
+   ========================================= */
+.main-header {
+    background-color: #4f46e5; /* Color Índigo principal */
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.main-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.main-header p {
+    color: #c7d2fe; /* Índigo muy claro */
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   3. LAYOUT (ESTRUCTURA)
+   ========================================= */
+.container {
+    max-width: 1100px;
+    margin: 0 auto; /* Centrar en pantalla */
+    padding: 2rem 1rem;
+}
+
+.section-block {
+    margin-bottom: 3.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #4338ca; /* Índigo oscuro */
+    border-bottom: 3px solid #e0e7ff;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Grillas Responsivas (CSS Grid) */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr; /* Por defecto 1 columna (móvil) */
+    gap: 2rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* Regla para PC/Tablets: Cambia a 2 o 3 columnas */
+@media (min-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* =========================================
+   4. TARJETAS DE CONCEPTOS (CARDS)
+   ========================================= */
+.card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Bordes de colores laterales */
+.border-blue { border-left: 5px solid #3b82f6; }
+.border-red { border-left: 5px solid #ef4444; }
+
+/* Tarjetas especiales para Llaves */
+.card-yellow {
+    background-color: #fffbeb;
+    border: 1px solid #fde68a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+.card-yellow h3 { color: #b45309; }
+
+.card-green {
+    background-color: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+.card-green h3 { color: #047857; }
+
+/* =========================================
+   5. TABLAS DE DATOS
+   ========================================= */
+.table-wrapper {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    overflow-x: auto; /* Scroll horizontal en móviles */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.data-table thead {
+    background-color: #f9fafb;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Estilos de Resaltado (Highlight) */
+.highlight-col {
+    background-color: #eff6ff; /* Azul muy claro */
+    border: 2px dashed #3b82f6;
+    position: relative;
+}
+
+.highlight-row {
+    background-color: #fef2f2; /* Rojo muy claro */
+    border: 2px dashed #ef4444;
+    position: relative;
+}
+
+/* Etiquetas flotantes sobre la tabla */
+.label-tag {
+    position: absolute;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+.tag-col {
+    background-color: #3b82f6;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tag-row {
+    background-color: #ef4444;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Badges PK/FK */
+.badge {
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: white;
+    margin-left: 5px;
+}
+.pk { background-color: #f59e0b; } /* Naranja */
+.fk { background-color: #10b981; } /* Verde */
+
+/* =========================================
+   6. DIAGRAMA DE RELACIONES
+   ========================================= */
+.relation-diagram {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mini-table {
+    border: 1px solid #d1d5db;
+    width: 100%;
+    max-width: 300px;
+}
+.mini-table caption {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #6b7280;
+}
+
+.arrow-connector {
+    height: 40px;
+    border-left: 2px dashed #9ca3af;
+    position: relative;
+}
+.arrow-text {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 0.75rem;
+    color: #6b7280;
+    width: 200px;
+}
+
+/* =========================================
+   7. TIPOS DE RELACIONES (1:1, 1:N, N:M)
+   ========================================= */
+.rel-card {
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    border: 1px solid #e5e7eb;
+}
+
+.rel-card:hover {
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+}
+
+.rel-header {
+    padding: 1rem;
+    text-align: center;
+    color: white;
+}
+.rel-header h3 { font-size: 1.5rem; }
+.rel-header span { font-size: 0.75rem; text-transform: uppercase; opacity: 0.9; }
+
+/* Colores de cabecera */
+.bg-blue { background-color: #2563eb; }
+.bg-indigo { background-color: #4f46e5; }
+.bg-purple { background-color: #9333ea; }
+
+.rel-body {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.rel-icons {
+    font-size: 2rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.rel-desc {
+    font-size: 0.85rem;
+    color: #4b5563;
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}

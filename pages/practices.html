@@ -1,11 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portafolio de Base de Datos - Estudiantes</title>
+    
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="practices.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    
+
+    <header class="main-header">
+        <nav class="top-nav">
+            <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+        </nav>
+        
+        <div class="header-content">
+            <h1><i class="fas fa-tasks"></i> Reporte de Actividades SQL</h1>
+            <p>Base de Datos: <strong>Estudiantes</strong></p>
+            
+            <a href="https://database.android-web.com/contenidos/exercisesSql.html" target="_blank" class="source-link">
+                <i class="fas fa-external-link-alt"></i> Ver indicaciones de la actividad
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="activities-grid">
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">01</span> Promedio > 7</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta todos los estudiantes cuyo promedio sea mayor a 7.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-1.jpg" alt="Resultado SQL Actividad 1">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">02</span> Estudiantes Quito</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes que viven en la ciudad de Quito.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-2.jpg" alt="Resultado SQL Actividad 2">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">03</span> Edad 18-20</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes cuya edad esté entre 18 y 20 años.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-3.jpg" alt="Resultado SQL Actividad 3">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">04</span> Año 2024</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes registrados en 2024.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-4.jpg" alt="Resultado SQL Actividad 4">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">05</span> Apellido con "M"</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes cuyo apellido comienza con la letra "M".</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-5.jpg" alt="SQL Actividad 5">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">06</span> Sistemas o Medicina</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes que estudian las carreras de Sistemas o Medicina.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-6.jpg" alt="SQL Actividad 6">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">07</span> Promedio 8 - 9</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes cuyo promedio esté entre 8 y 9.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-7.jpg" alt="SQL Actividad 7">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">08</span> Orden por Promedio</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta todos los estudiantes ordenados por promedio de mayor a menor.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-8.jpg" alt="SQL Actividad 8">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">09</span> Conteo por Ciudad</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta cuántos estudiantes hay registrados en cada ciudad.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-9.jpg" alt="SQL Actividad 9">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">10</span> Promedio General</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta el promedio general de calificaciones de todos los estudiantes.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-10.jpg" alt="SQL Actividad 10">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">11</span> Carreras Únicas</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta la lista de carreras disponibles sin repetir ninguna.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-11.jpg" alt="SQL Actividad 11">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">12</span> Mayores de 21</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta cuántos estudiantes tienen más de 21 años.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-12.jpg" alt="SQL Actividad 12">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">13</span> Promedio Máximo</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta cuál es el promedio más alto entre todos los estudiantes.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-13.jpg" alt="SQL Actividad 13">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">14</span> Contiene letra "a"</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes cuyo nombre contiene la letra "a".</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-14.jpg" alt="SQL Actividad 14">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">15</span> Ciudades > 2 Alumnos</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta las ciudades que tienen más de dos estudiantes registrados.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-15.jpg" alt="SQL Actividad 15">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">16</span> Edad Prom. Medicina</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta la edad promedio de los estudiantes de la carrera de Medicina.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-16.jpg" alt="SQL Actividad 16">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">17</span> Promedio < 7</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes que tienen un promedio menor a 7.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-17.jpg" alt="SQL Actividad 17">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">18</span> Ambato, Loja, Manta</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes que viven en Ambato, Loja o Manta.</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-18.jpg" alt="SQL Actividad 18">
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <header class="card-header">
+                    <h2><span class="activity-number">19</span> Termina en "ez"</h2>
+                </header>
+                <div class="card-body">
+                    <p class="statement">Consulta los estudiantes cuyo apellido termina en "ez".</p>
+                    <div class="evidence-box">
+                        <img src="../img/cap-act-19.jpg" alt="SQL Actividad 19">
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
 </body>
 </html>

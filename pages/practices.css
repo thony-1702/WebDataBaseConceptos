@@ -1,0 +1,177 @@
+/* =========================================
+   1. VARIABLES Y BASE (Coherencia Visual)
+   ========================================= */
+:root {
+    --primary: #2c3e50;
+    --accent: #3498db;
+    --card-bg: #ffffff;
+    --header-gradient: linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(42, 82, 152, 0.95) 100%);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    padding-bottom: 50px;
+    /* Dejamos el fondo transparente para que se vea la imagen del styles.css principal */
+}
+
+/* =========================================
+   2. HEADER MEJORADO
+   ========================================= */
+.main-header {
+    background: var(--header-gradient);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: 4px solid var(--accent);
+}
+
+.main-header h1 { margin: 0; font-size: 2.2rem; margin-bottom: 10px; }
+.main-header p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 15px; }
+
+/* Botón Volver */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: 0.3s;
+}
+.btn-back:hover { background: rgba(255,255,255,0.4); }
+
+/* Enlace a fuente externa */
+.source-link {
+    display: inline-block;
+    background-color: var(--accent);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+.source-link:hover { transform: scale(1.05); background-color: #2980b9; }
+
+/* =========================================
+   3. GRID DE ACTIVIDADES
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.activities-grid {
+    display: grid;
+    /* Grid inteligente: crea columnas de mínimo 350px */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+/* =========================================
+   4. TARJETAS DE EVIDENCIA
+   ========================================= */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden; /* Para que la imagen no se salga de las esquinas */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Sombra elegante */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+    
+    /* Flexbox vertical para que el contenido se distribuya bien */
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+/* Cabecera de la tarjeta */
+.card-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px 20px;
+    border-left: 5px solid var(--accent);
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.activity-number {
+    background-color: var(--accent);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+    padding: 20px;
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.statement {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+}
+
+/* Caja de la Imagen (Evidencia) */
+.evidence-box {
+    margin-top: auto; /* Empuja la imagen al fondo de la tarjeta */
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.evidence-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    /* Efecto para que parezca una captura real */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    cursor: zoom-in; /* Cursor de lupa */
+}
+
+.evidence-box img:hover {
+    transform: scale(1.02); /* Pequeño zoom al pasar el mouse */
+}
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos Básicos - Base de Datos</title>
+    
+    <link rel="stylesheet" href="concepts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="top-nav">
+            <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+        </nav>
+        <div class="header-content">
+            <h1><i class="fas fa-database"></i> Bases de Datos</h1>
+            <p>Fundamentos teóricos explicados visualmente</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="section-block">
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> 1. Estructura Básica</h2>
+            
+            <div class="grid-2">
+                <div class="definitions-group">
+                    <article class="card">
+                        <h3><i class="fas fa-table color-blue"></i> Tabla</h3>
+                        <p>Contenedor principal. Es la estructura donde se organiza la información de un tema (ej: Clientes).</p>
+                    </article>
+                    
+                    <article class="card border-blue">
+                        <h3><i class="fas fa-columns color-blue"></i> Columna (Campo)</h3>
+                        <p>Unidad vertical. Define el <strong>tipo de dato</strong> (texto, número, fecha). Representa los atributos.</p>
+                    </article>
+                    
+                    <article class="card border-red">
+                        <h3><i class="fas fa-bars color-red"></i> Fila (Registro)</h3>
+                        <p>Unidad horizontal. Es un ítem individual o instancia única dentro de la tabla.</p>
+                    </article>
+                </div>
+
+                <figure class="table-wrapper">
+                    <figcaption>Ejemplo: Tabla USUARIOS</figcaption>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th class="highlight-col">Nombre <span class="tag tag-col">Columna</span></th>
+                                <th>Edad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td class="highlight-col">Ana</td><td>28</td></tr>
+                            <tr class="highlight-row">
+                                <td>2</td>
+                                <td class="highlight-col">Carlos <span class="tag tag-row">Fila</span></td>
+                                <td>35</td>
+                            </tr>
+                            <tr><td>3</td><td class="highlight-col">Luis</td><td>22</td></tr>
+                        </tbody>
+                    </table>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title"><i class="fas fa-key"></i> 2. Llaves (Keys)</h2>
+            
+            <div class="grid-2">
+                <div class="definitions-group">
+                    <article class="card card-yellow">
+                        <h3><i class="fas fa-key"></i> Primary Key (PK)</h3>
+                        <p>Identificador <strong>único</strong>. No se repite nunca y no puede estar vacío.</p>
+                    </article>
+                    <article class="card card-green">
+                        <h3><i class="fas fa-link"></i> Foreign Key (FK)</h3>
+                        <p>Es el puente que conecta con otra tabla. Apunta a la PK de la tabla padre.</p>
+                    </article>
+                </div>
+
+                <figure class="relation-diagram">
+                    <figcaption>Conexión entre tablas</figcaption>
+                    
+                    <div class="diagram-box">
+                        <table class="data-table mini-table">
+                            <caption>Tabla: AUTORES</caption>
+                            <tr><th>ID <span class="badge pk">PK</span></th><th>Nombre</th></tr>
+                            <tr class="row-highlight-yellow"><td>101</td><td>Rowling</td></tr>
+                        </table>
+                        
+                        <div class="arrow-connector">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>El ID viaja</span>
+                        </div>
+
+                        <table class="data-table mini-table">
+                            <caption>Tabla: LIBROS</caption>
+                            <tr><th>ID</th><th>Título</th><th>AutorID <span class="badge fk">FK</span></th></tr>
+                            <tr><td>1</td><td>Harry Potter</td><td class="row-highlight-green">101</td></tr>
+                        </table>
+                    </div>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> 3. Tipos de Relaciones</h2>
+            
+            <div class="grid-3">
+                
+                <article class="rel-card">
+                    <header class="rel-header bg-blue">
+                        <h3>1 : 1</h3>
+                        <span>Uno a Uno</span>
+                    </header>
+                    <div class="rel-body">
+                        <div class="rel-icons"><i class="fas fa-user"></i> <i class="fas fa-exchange-alt"></i> <i class="fas fa-id-card"></i></div>
+                        <p><strong>Concepto:</strong> Un registro de A solo tiene un registro en B.</p>
+                        <hr>
+                        <p class="small-text"><em>Ej: Empleado ↔ Pasaporte.</em></p>
+                    </div>
+                </article>
+
+                <article class="rel-card">
+                    <header class="rel-header bg-indigo">
+                        <h3>1 : N</h3>
+                        <span>Uno a Muchos</span>
+                    </header>
+                    <div class="rel-body">
+                        <div class="rel-icons"><i class="fas fa-user-tie"></i> <i class="fas fa-long-arrow-alt-right"></i> <i class="fas fa-layer-group"></i></div>
+                        <p><strong>Concepto:</strong> Un registro de A tiene muchos en B.</p>
+                        <hr>
+                        <p class="small-text"><em>Ej: Cliente ↔ Pedidos. (La más común).</em></p>
+                    </div>
+                </article>
+
+                <article class="rel-card">
+                    <header class="rel-header bg-purple">
+                        <h3>N : M</h3>
+                        <span>Muchos a Muchos</span>
+                    </header>
+                    <div class="rel-body">
+                        <div class="rel-icons"><i class="fas fa-users"></i> <i class="fas fa-random"></i> <i class="fas fa-book"></i></div>
+                        <p><strong>Concepto:</strong> Muchos de A con muchos de B.</p>
+                        <hr>
+                        <p class="small-text"><em>Ej: Estudiantes ↔ Clases. (Requiere tabla intermedia).</em></p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    
+
+</body>
+</html>

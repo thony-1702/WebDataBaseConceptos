@@ -1,0 +1,252 @@
+/* =========================================
+   1. CONFIGURACIÓN BASE
+   ========================================= */
+:root {
+    --primary: #2c3e50;    /* Color oscuro para textos */
+    --accent: #3498db;     /* Azul principal */
+    --success: #2ecc71;    /* Verde */
+    --warning: #f1c40f;    /* Amarillo */
+    --danger: #e74c3c;     /* Rojo */
+}
+
+/* IMPORTANTE: No ponemos background aquí para que 
+   se vea la imagen de fondo de tu archivo styles.css principal */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    /* Un poco de padding abajo para que no se corte el footer */
+    padding-bottom: 50px;
+    background: url(".../img/fondo_base_de_datos.png") no-repeat fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. HEADER ESPECÍFICO (Con degradado)
+   ========================================= */
+.main-header {
+    /* Degradado azul semitransparente para que combine con tu fondo */
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(42, 82, 152, 0.95) 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: 4px solid var(--warning); /* Un borde dorado elegante */
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Botón flotante de "Volver" */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-back:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+/* =========================================
+   3. ESTRUCTURA (GRID Y CONTENEDOR)
+   ========================================= */
+.container {
+    max-width: 1100px; /* Un poco más ancho para que quepan las tablas */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section-block {
+    /* Fondo blanco semitransparente para agrupar cada sección */
+    background-color: rgba(255, 255, 255, 0.90);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.section-title {
+    border-bottom: 3px solid #ddd;
+    padding-bottom: 10px;
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+/* Grid de 2 Columnas */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+/* Grid de 3 Columnas */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* =========================================
+   4. TARJETAS (DEFINICIONES)
+   ========================================= */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    border-left: 5px solid #ccc; /* Borde gris por defecto */
+}
+
+.card h3 { 
+    margin-top: 0; 
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre icono y texto */
+}
+
+/* Colores específicos de bordes */
+.border-blue { border-left-color: var(--accent); }
+.border-red { border-left-color: var(--danger); }
+.card-yellow { border-left-color: var(--warning); background: #fffcf0; }
+.card-green { border-left-color: var(--success); background: #f0fbf4; }
+
+/* Colores de texto para iconos */
+.color-blue { color: var(--accent); }
+.color-red { color: var(--danger); }
+
+/* =========================================
+   5. TABLAS Y DIAGRAMAS
+   ========================================= */
+.table-wrapper, .relation-diagram {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    margin: 0;
+}
+
+figcaption {
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* Estilo de la tabla de datos */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Resaltados específicos */
+.highlight-col { background-color: #e3f2fd; position: relative; }
+.highlight-row { background-color: #fdeaea; position: relative; }
+.row-highlight-yellow { background-color: #fff9c4; }
+.row-highlight-green { background-color: #d1fae5; }
+
+/* Etiquetas flotantes pequeñas */
+.tag {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    position: absolute;
+    top: -8px;
+    right: -5px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.tag-col { background: var(--accent); }
+.tag-row { background: var(--danger); }
+
+/* Diagrama de flechas */
+.diagram-box { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.arrow-connector { color: #999; display: flex; flex-direction: column; align-items: center; }
+.badge { padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; color: white; margin-left: 5px; }
+.pk { background-color: var(--warning); color: #333; }
+.fk { background-color: var(--success); }
+
+/* =========================================
+   6. TARJETAS DE RELACIONES (1:1, 1:N)
+   ========================================= */
+.rel-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden; /* Para que el header no se salga de las esquinas */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    border: 1px solid #eee;
+}
+
+.rel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.rel-header {
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.rel-header h3 { margin: 0; font-size: 1.8rem; }
+.rel-header span { font-size: 0.85rem; opacity: 0.9; font-weight: normal; }
+
+/* Fondos de colores para headers */
+.bg-blue { background: var(--accent); }
+.bg-indigo { background: #3f51b5; }
+.bg-purple { background: #9c27b0; }
+
+.rel-body { padding: 20px; text-align: center; }
+.rel-icons { font-size: 1.8rem; color: #666; margin-bottom: 15px; }
+.rel-icons i { margin: 0 8px; }
+
+hr { border: 0; height: 1px; background: #eee; margin: 15px 0; }
+.small-text { font-size: 0.85rem; color: #888; font-style: italic; }
+
+/* Footer simple */
+footer {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    font-size: 0.9rem;
+    /* Fondo oscuro semitransparente para que se lea sobre la imagen */
+    background-color: rgba(0, 0, 0, 0.6); 
+    margin-top: 40px;
+}

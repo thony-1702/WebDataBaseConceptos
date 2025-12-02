@@ -1,0 +1,97 @@
+/* === ESTILOS GENERALES === */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Agregué una fuente por defecto para el cuerpo */
+    
+    /* Fondo */
+    background: url("img/fondo_base_de_datos.png") no-repeat fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+header {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    color: #ffffff;
+    text-align: center; /* Centra el texto horizontalmente */
+    padding-top: 20px;  /* Cambié margin-top por padding para evitar espacios blancos */
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px #000000; /* Agregué sombra al texto para que se lea mejor sobre el fondo */
+}
+
+/* === CONTENEDOR DE LA GALERÍA (UL) === */
+.galeria-tarjetas {
+    list-style: none; 
+    padding: 0 20px; /* Margen lateral en móviles */
+    margin: 0 auto;  
+    max-width: 1000px; 
+    
+    /* CORRECCIÓN IMPORTANTE: Cambiado de Flex a Grid */
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    
+    /* CORRECCIÓN: Define un alto mínimo igual para todas las filas */
+    grid-auto-rows: 1fr; 
+    
+    gap: 30px;
+}
+
+/* === DISEÑO DE LA TARJETA (ENLACE A) === */
+.galeria-tarjetas a {
+    display: block; 
+    background-color: white; /* Color de fondo de la tarjeta */
+    padding: 30px;
+    border-radius: 12px; 
+    text-decoration: none; 
+    color: #333; 
+    
+    /* CORRECCIÓN: Para que ocupen todo el alto de la celda */
+    height: 100%; 
+    box-sizing: border-box; /* Evita que el padding deforme el tamaño */
+    
+    /* Alineación interna de los elementos de la tarjeta */
+    display: flex;       
+    flex-direction: column; 
+    align-items: center;    /* Centra icono y textos horizontalmente */
+    text-align: center;     /* Asegura que el texto esté centrado */
+    
+    /* Sombra y Borde */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 5px solid #396696; 
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Títulos dentro de la tarjeta */
+.galeria-tarjetas h2 {
+    text-decoration: none; /* Quité el subrayado punteado (opcional, se ve más limpio) */
+    margin-top: 15px;      /* Espacio entre icono y título */
+    margin-bottom: 10px;
+    color: #000000; 
+    font-size: 1.5rem;
+}
+
+/* Párrafos dentro de la tarjeta */
+.galeria-tarjetas p {
+    color: #666; 
+    line-height: 1.5; 
+    margin: 0;
+}
+
+/* Efecto Hover */
+.galeria-tarjetas a:hover {
+    transform: translateY(-7px); 
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15); 
+    background-color: #f9f9f9; /* Un cambio sutil de color */
+}
+
+/* Iconos */
+.icono-tarjeta {
+    width: 60px;
+    height: 60px;
+    object-fit: contain; /* Asegura que el icono no se aplaste */
+    margin-bottom: 10px;
+}

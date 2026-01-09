@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deber 3</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles.css"> 
+
+    <link rel="stylesheet" href="practices_2.css">
+</head>
+<body>
+
+    <header class="main-header">
+                    <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+        <div class="header-content">
+            <h1><i class="fas fa-database"></i> Deber 3</h1>
+            <p>Documentación de actividad práctica: Sistema de Gestión de Calificaciones</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <section class="doc-section">
+            <h2 class="section-title">
+                <i class="fas fa-layer-group"></i> 1. Configuración Inicial y Estructura
+            </h2>
+
+            <div class="info-card card-blue" style="margin-bottom: 20px;">
+                <h3><i class="fas fa-cogs"></i> Script de Creación</h3>
+                <p>Para garantizar resultados consistentes en las consultas (mínimo 3 registros por caso), se diseñó un script "todo en uno".</p>
+                <p>Este script crea la estructura relacional (Alumnos, Materias, Notas, etc.) e inserta datos estratégicamente pensados para probar escenarios de aprobación y reprobación.</p>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">Script para crear las tablas y agregar contenidos</div>
+<pre><code class="language-sql">
+-- ==========================================================
+-- 1. CREACIÓN DE TABLAS (ESTRUCTURA)
+-- ==========================================================
+CREATE TABLE paralelos (
+    id INT PRIMARY KEY, nombre VARCHAR(5)
+);
+
+CREATE TABLE docentes (
+    id INT PRIMARY KEY, nombre VARCHAR(50), apellido VARCHAR(50)
+);
+
+CREATE TABLE alumnos (
+    id INT PRIMARY KEY, nombre VARCHAR(50), apellido VARCHAR(50),
+    semestre_actual INT, id_paralelo INT,
+    FOREIGN KEY (id_paralelo) REFERENCES paralelos(id)
+);
+
+CREATE TABLE materias (
+    id INT PRIMARY KEY, nombre VARCHAR(50), semestre INT,
+    id_docente INT, FOREIGN KEY (id_docente) REFERENCES docentes(id)
+);
+
+CREATE TABLE actividades (
+    id INT PRIMARY KEY, nombre VARCHAR(50), tipo VARCHAR(20),
+    porcentaje DECIMAL(4,2), id_materia INT,
+    FOREIGN KEY (id_materia) REFERENCES materias(id)
+);
+
+CREATE TABLE calificaciones (
+    id INT PRIMARY KEY AUTO_INCREMENT, nota DECIMAL(4,2),
+    id_alumno INT, id_actividad INT,
+    FOREIGN KEY (id_alumno) REFERENCES alumnos(id),
+    FOREIGN KEY (id_actividad) REFERENCES actividades(id)
+);
+
+-- ==========================================================
+-- 2. INGRESO DE DATOS ESTRATÉGICOS (Resumen)
+-- ==========================================================
+-- Se insertaron 12 alumnos y notas para asegurar resultados.
+
+INSERT INTO paralelos VALUES (1, 'A'), (2, 'B');
+INSERT INTO docentes VALUES (1, 'Roberto', 'Gomez'), (2, 'Laura', 'Vargas'), 
+(3, 'Esteban', 'Quito');
+
+INSERT INTO materias VALUES (1, 'Matemáticas', 1, 1), (2, 'Historia', 1, 2),
+(3, 'Física', 2, 3), (4, 'Química', 2, 2);
+
+-- Insertamos 13 Alumnos (distribuidos en semestres y paralelos)
+INSERT INTO alumnos VALUES
+(1, 'Juan', 'Perez', 1, 1), (2, 'Maria', 'Rodriguez', 1, 1),
+(3, 'Pedro', 'Alvarez', 1, 1), (4, 'Jose', 'Villavicencio', 1, 1),
+(5, 'Luis', 'Martinez', 1, 2), (6, 'Ana', 'Sánchez', 1, 2),
+(7, 'Sofia', 'Torres', 1, 2), (8, 'Carmen', 'Salinas', 1, 2),
+(9, 'Carlos', 'Ruiz', 2, 1), (10, 'Elena', 'Mora', 2, 1),
+(11, 'Diana', 'López', 2, 2), (12, 'Roberto', 'Diaz', 2, 2),
+(13, 'Laura', 'Mejia', 2, 2);
+
+</code></pre>   
+            </div>
+            <div class="flex-row">
+                
+                <div class="col-left">
+                    <div class="info-card card-blue">
+                        <h3><i class="fas fa-project-diagram"></i> Diagrama Relacional</h3>
+                        <p>Visualización gráfica del esquema de la base de datos. Se muestran las tablas <strong>Alumnos, Docentes, Materias y Calificaciones</strong> con sus respectivas relaciones (Claves Foráneas).</p>
+                        <p>Este modelo permite entender cómo se vinculan las notas con las actividades y los estudiantes.</p>
+                    </div>
+                </div>
+
+                <div class="col-right">
+                    <div class="result-box">
+                        <h4>Esquema E-R (Entidad Relación)</h4>
+                        <img src="../img/diagrama deber 3.png" alt="Diagrama de Base de Datos">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2 class="section-title">
+                <i class="fas fa-search-dollar"></i> 2. Consultas Realizadas
+            </h2>
+            <p class="section-intro">A continuación se presentan las 8 consultas SQL solicitadas, mostrando el código utilizado y la evidencia del resultado en la base de datos.</p>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-green">
+                            <h3><span class="q-num">01</span> 1er Semestre - Paralelo A</h3>
+                            <p>Mostrar todos los alumnos que se encuentran en primer semestre y pertenecen al paralelo A. Se requiere unir la tabla de alumnos con la de paralelos.</p>
+                            <div class="mini-code">
+<pre><code>SELECT a.nombre, a.apellido, a.semestre_actual, p.nombre AS paralelo
+FROM alumnos a
+JOIN paralelos p ON a.id_paralelo = p.id
+WHERE a.semestre_actual = 1
+AND p.nombre = 'A';</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_1.png" alt="Evidencia Consulta 1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-green">
+                            <h3><span class="q-num">02</span> Estudiantes Paralelo B</h3>
+                            <p>Mostrar todos los estudiantes que están inscritos en el paralelo B, independientemente de su semestre.</p>
+                            <div class="mini-code">
+<pre><code>SELECT a.nombre, a.apellido, p.nombre as paralelo
+FROM alumnos a
+JOIN paralelos p ON a.id_paralelo = p.id
+WHERE p.nombre = 'B';</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_2.png" alt="Evidencia Consulta 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-green">
+                            <h3><span class="q-num">03</span> Materias 1er Semestre</h3>
+                            <p>Listar los nombres de las materias que se imparten actualmente en el primer semestre.</p>
+                            <div class="mini-code">
+<pre><code>SELECT nombre as materia_semestre_1
+FROM materias
+WHERE semestre = 1;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_3.png" alt="Evidencia Consulta 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-green">
+                            <h3><span class="q-num">04</span> Materias 2do Semestre</h3>
+                            <p>Listar los nombres de las materias que se imparten actualmente en el segundo semestre.</p>
+                            <div class="mini-code">
+<pre><code>SELECT nombre as materia_semestre_2
+FROM materias
+WHERE semestre = 2;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_4.png" alt="Evidencia Consulta 4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-green">
+                            <h3><span class="q-num">05</span> Actividades de una Materia</h3>
+                            <p>Mostrar todas las actividades evaluativas definidas para una materia específica (Ej: Matemáticas, ID 1), incluyendo su tipo y porcentaje.</p>
+                            <div class="mini-code">
+<pre><code>SELECT m.nombre as materia, a.nombre as actividad, a.tipo, a.porcentaje
+FROM actividades a
+JOIN materias m ON a.id_materia = m.id
+WHERE a.id_materia = 1;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_5.png" alt="Evidencia Consulta 5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container featured-query">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-orange">
+                            <h3><span class="q-num">06</span> Promedio Final Detallado</h3>
+                            <p><strong>Consulta Compleja:</strong> Calcula el promedio final ponderado (SUM de nota * porcentaje). Además, utiliza una técnica de "pivoteo" condicional (CASE WHEN) para mostrar las notas de Deber, Lección y Examen en columnas separadas en la misma fila.</p>
+                            <div class="mini-code">
+<pre><code>SELECT al.nombre, al.apellido, m.nombre AS materia,
+ -- Pivote para mostrar las notas individuales
+ MAX(CASE WHEN act.tipo = 'Deber' THEN c.nota END) AS Deber,
+ MAX(CASE WHEN act.tipo = 'Leccion' THEN c.nota END) AS Leccion,
+ MAX(CASE WHEN act.tipo = 'Examen' THEN c.nota END) AS Examen,
+ -- Cálculo del promedio
+ SUM(c.nota * act.porcentaje) AS Promedio_Final
+FROM calificaciones c
+JOIN alumnos al ON c.id_alumno = al.id
+JOIN actividades act ON c.id_actividad = act.id
+JOIN materias m ON act.id_materia = m.id
+WHERE m.id = 1 -- Filtramos solo Matemáticas
+GROUP BY al.id, al.nombre, al.apellido, m.nombre;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_6.png" alt="Evidencia Consulta 6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-green">
+                            <h3><span class="q-num">07</span> Alumnos Aprobados (1er Sem)</h3>
+                            <p>Mostrar los alumnos de primer semestre cuyo promedio final ponderado es mayor o igual a 7. Requiere GROUP BY y HAVING.</p>
+                            <div class="mini-code">
+<pre><code>SELECT al.nombre, al.apellido,
+ SUM(c.nota * act.porcentaje) as nota_final
+FROM calificaciones c
+JOIN alumnos al ON c.id_alumno = al.id
+JOIN actividades act ON c.id_actividad = act.id
+WHERE al.semestre_actual = 1
+GROUP BY al.id
+HAVING nota_final >= 7;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_7.png" alt="Evidencia Consulta 7">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-container">
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="info-card card-red">
+                            <h3><span class="q-num">08</span> Alumnos Suspensos (2do Sem)</h3>
+                            <p>Mostrar los alumnos de segundo semestre cuyo promedio final es inferior a 7 (Reprobados).</p>
+                            <div class="mini-code">
+<pre><code>SELECT al.nombre, al.apellido,
+ SUM(c.nota * act.porcentaje) as nota_final
+FROM calificaciones c
+JOIN alumnos al ON c.id_alumno = al.id
+JOIN actividades act ON c.id_actividad = act.id
+WHERE al.semestre_actual = 2
+GROUP BY al.id
+HAVING nota_final < 7;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <h4>Resultado en Pantalla</h4>
+                            <img src="../img/Deber_3_consulta_8.png" alt="Evidencia Consulta 8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    
+
+</body>
+</html>

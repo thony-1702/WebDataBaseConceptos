@@ -1,0 +1,308 @@
+/* =========================================
+   1. RESET Y VARIABLES GLOBALES
+   ========================================= */
+:root {
+    /* Colores basados en la imagen de referencia */
+    --header-bg: #2c5282; /* Azul oscuro */
+    --header-border: #ecc94b; /* Amarillo/Dorado */
+    --bg-body: #f7fafc; /* Gris muy claro de fondo */
+    --bg-container: #ffffff; /* Blanco para la "hoja" central */
+    
+    /* Colores para las tarjetas de información (bordes izquierdos) */
+    --card-blue: #4299e1;
+    --card-green: #48bb78;
+    --card-orange: #ed8936; /* Para la consulta destacada */
+    --card-red: #f56565; /* Para reprobados */
+
+    --text-dark: #2d3748;
+    --text-light: #718096;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    
+    /* CAMBIO AQUÍ: */
+    /* En lugar de un color sólido, ponemos transparente o quitamos la línea */
+    background-color: transparent; 
+    
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding-bottom: 60px;
+}
+
+/* =========================================
+   2. HEADER PRINCIPAL (Estilo Referencia)
+   ========================================= */
+.main-header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    /* El borde amarillo inferior */
+    border-bottom: 5px solid var(--header-border);
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.main-header p {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Botón "Volver" */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* =========================================
+   3. CONTENEDOR CENTRAL (La "Hoja")
+   ========================================= */
+.main-container {
+    max-width: 1100px;
+    margin: -30px auto 0;
+    
+    /* IMPORTANTE: Esto crea el efecto de hoja blanca sobre tu fondo */
+    background-color: #ffffff; 
+    
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Títulos de Sección (Ej: "1. ESTRUCTURA BÁSICA") */
+.section-title {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--header-bg);
+}
+
+.section-intro {
+    margin-bottom: 30px;
+    color: var(--text-light);
+}
+
+/* =========================================
+   4. SISTEMA FLEX (2 COLUMNAS)
+   ========================================= */
+.flex-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    align-items: start; /* Alinea al inicio superior */
+}
+
+.col-left {
+    flex: 1; /* Toma 1 parte del espacio */
+    min-width: 300px;
+}
+
+.col-right {
+    flex: 1.5; /* Toma 1.5 partes (más ancho para código/imágenes) */
+}
+
+/* Responsive: En móviles, una columna debajo de otra */
+@media (max-width: 768px) {
+    .flex-row {
+        flex-direction: column;
+    }
+    .main-container {
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .btn-back {
+        position: static;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+}
+
+/* =========================================
+   5. TARJETAS DE INFORMACIÓN (Izquierda)
+   ========================================= */
+.info-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-left-width: 5px; /* Borde de color grueso a la izquierda */
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Variantes de color para el borde izquierdo */
+.card-blue { border-left-color: var(--card-blue); }
+.card-green { border-left-color: var(--card-green); }
+.card-orange { border-left-color: var(--card-orange); }
+.card-red { border-left-color: var(--card-red); }
+
+.info-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dark);
+}
+
+.info-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+/* Números de consulta (Ej: "01") */
+.q-num {
+    background: var(--text-dark);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   6. VISUALIZACIÓN DE CÓDIGO (Derecha/Izquierda)
+   ========================================= */
+/* Ventana de código grande (para el script inicial) */
+.code-window {
+    background: #1e1e1e; /* Fondo oscuro editor */
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.code-header {
+    background: #333;
+    color: #ccc;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+pre {
+    margin: 0;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #d4d4d4; /* Color de texto claro */
+}
+
+/* Mini bloques de código dentro de las tarjetas de información */
+.mini-code pre {
+    background: #f1f5f9; /* Fondo claro para snippets pequeños */
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+}
+.mini-code code {
+    color: var(--header-bg); /* Color azul oscuro para el texto */
+    font-size: 0.85rem;
+}
+
+/* =========================================
+   7. CAJAS DE RESULTADOS (Imágenes)
+   ========================================= */
+.result-box {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.result-box h4 {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.result-box img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    /* Efecto elegante al pasar el mouse */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.result-box img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Separador entre consultas */
+.query-container {
+    border-bottom: 1px dashed #e2e8f0;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+/* Estilo especial para la consulta destacada (la número 6) */
+.featured-query {
+    background-color: #fffaf0; /* Un fondo naranja muy clarito */
+    padding: 20px;
+    border-radius: 8px;
+    border-bottom: none;
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}

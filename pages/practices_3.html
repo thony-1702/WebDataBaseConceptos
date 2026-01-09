@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deber 4: Sistema de Horarios</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../styles.css"> 
+    
+    <link rel="stylesheet" href="practices_3.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+        
+        <div class="header-content">
+            <h1><i class="fas fa-calendar-alt"></i> Deber 4</h1>
+            <p>Diseño y Normalización: Sistema de Horarios de Clases</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <section class="doc-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 1. Estructura y Normalización
+            </h2>
+
+            <div class="info-card card-blue mb-20">
+                <h3><i class="fas fa-image"></i> Referencia: Horario Original</h3>
+                <p>Se toma como base la siguiente imagen del horario de Desarrollo de Software (Cuarto "A") para realizar la normalización.</p>
+                <div class="text-center mt-10">
+                    <img src="../img/Horario_deber_4.png" alt="Horario Base" class="schedule-img border-img">
+                </div>
+            </div>
+
+            <div class="flex-row">
+                <div class="col-left">
+                    <div class="info-card card-blue">
+                        <h3><i class="fas fa-sitemap"></i> Diagrama ER Normalizado</h3>
+                        <p>Modelado realizado en <strong>dbdiagram.io</strong>.</p>
+                        <p>Se identificaron 3 entidades principales: <strong>Docentes, Materias y Horarios</strong> (Entidad asociativa que vincula día, hora, docente y materia).</p>
+                    </div>
+                </div>
+                <div class="col-right">
+                    <div class="result-box">
+                        <h4>Modelo Relacional</h4>
+                        <img src="../img/diagrama deber 4.png" alt="Diagrama Entidad Relación">
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header"><i class="fas fa-code"></i> Script SQL: Creación y Poblado de Datos</div>
+<pre><code class="language-sql">
+-- 1. CREACIÓN DE TABLAS
+CREATE TABLE docentes (
+    id_docente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    titulo VARCHAR(50)
+);
+
+CREATE TABLE materias (
+    id_materia INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_materia VARCHAR(100) NOT NULL,
+    fecha_inicio DATE,
+    fecha_fin DATE
+);
+
+CREATE TABLE horarios (
+    id_horario INT AUTO_INCREMENT PRIMARY KEY,
+    id_materia INT,
+    id_docente INT,
+    dia_semana VARCHAR(20),
+    hora_inicio TIME,
+    hora_fin TIME,
+    FOREIGN KEY (id_materia) REFERENCES materias(id_materia),
+    FOREIGN KEY (id_docente) REFERENCES docentes(id_docente)
+);
+
+-- 2. INSERTAR DATOS (Ejemplo resumido)
+INSERT INTO docentes (nombre, titulo) VALUES 
+('Darwin Chamba', 'Lic.'), ('Karelys Arredondo', 'Ing.'), ('Luis Ramirez', 'Lic.');
+
+-- NOTA: Las inserciones de horarios respetan que las clases son MARTES y JUEVES
+-- según la columna "Horario" de la imagen de referencia.
+</code></pre>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2 class="section-title">
+                <i class="fas fa-search"></i> 2. Resolución de Consultas
+            </h2>
+            <p class="section-intro">A continuación se presentan las 7 consultas solicitadas, con su respectiva evidencia y justificación basada en el horario.</p>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">01</span> ¿En qué horarios imparte clases el docente X y qué materias dicta?
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <p><strong>Docente consultado:</strong> Lic. Darwin Chamba</p>
+                        <div class="mini-code">
+<pre><code>SELECT d.nombre, m.nombre_materia, 
+h.dia_semana, h.hora_inicio, h.hora_fin
+FROM horarios h
+JOIN docentes d ON h.id_docente = d.id_docente
+JOIN materias m ON h.id_materia = m.id_materia
+WHERE d.nombre LIKE '%Darwin Chamba%';</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_1.png" alt="Evidencia Consulta 1">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box">
+                    <strong><i class="fas fa-shield-alt"></i> Defensa del Resultado:</strong>
+                    <p>El sistema devuelve 4 registros. Según el horario base, el Lic. Chamba imparte "Manejo de Base de Datos" (18:00-20:00) y "POO" (20:00-22:00). Al ser clases martes y jueves, aparecen 2 registros por cada materia.</p>
+                </div>
+            </div>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">02</span> ¿Qué docente imparte la materia X y en qué días/horas?
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <p><strong>Materia consultada:</strong> Redes Estructuradas</p>
+                        <div class="mini-code">
+<pre><code>SELECT m.nombre_materia, d.nombre, 
+h.dia_semana, h.hora_inicio
+FROM horarios h
+JOIN docentes d ON h.id_docente = d.id_docente
+JOIN materias m ON h.id_materia = m.id_materia
+WHERE m.nombre_materia LIKE '%Redes Estructuradas%';</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_2.png" alt="Evidencia Consulta 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box">
+                    <strong><i class="fas fa-shield-alt"></i> Defensa del Resultado:</strong>
+                    <p>La consulta identifica correctamente al Lic. Luis Ramirez. El horario indica que esta materia es el tercer módulo (Marzo-Abril), dictada Martes y Jueves de 18:00 a 20:00.</p>
+                </div>
+            </div>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">03</span> ¿Qué materias imparte el docente X durante toda la semana?
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <p><strong>Docente consultado:</strong> Ing. Karelys Arredondo</p>
+                        <div class="mini-code">
+<pre><code>SELECT DISTINCT d.nombre, m.nombre_materia
+FROM horarios h
+JOIN docentes d ON h.id_docente = d.id_docente
+JOIN materias m ON h.id_materia = m.id_materia
+WHERE d.nombre LIKE '%Karelys Arredondo%';</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_3.png" alt="Evidencia Consulta 3">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box">
+                    <strong><i class="fas fa-shield-alt"></i> Defensa del Resultado:</strong>
+                    <p>Se utiliza <code>DISTINCT</code> para no repetir días. La Ing. Arredondo dicta 3 materias según la imagen: "Sistemas de Gestión de BDD", "Arquitectura de Software" y "Metodología de la Investigación".</p>
+                </div>
+            </div>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">04</span> Horas totales a la semana del docente X
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <p><strong>Docente consultado:</strong> Lic. Darwin Chamba</p>
+                        <div class="mini-code">
+<pre><code>SELECT d.nombre, 
+SUM(TIMESTAMPDIFF(HOUR, h.hora_inicio, h.hora_fin)) 
+AS Horas_Semanales
+FROM horarios h
+JOIN docentes d ON h.id_docente = d.id_docente
+WHERE d.nombre LIKE '%Darwin Chamba%';</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_4.png" alt="Evidencia Consulta 4">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box">
+                    <strong><i class="fas fa-shield-alt"></i> Defensa del Resultado:</strong>
+                    <p>El docente tiene 2 materias. Cada materia son 2 horas el martes y 2 horas el jueves (4 horas/materia). Total: 8 horas semanales. El cálculo SQL confirma este valor.</p>
+                </div>
+            </div>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">05</span> Detalle de la materia 'Base de Datos'
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <div class="mini-code">
+<pre><code>SELECT m.nombre_materia, h.dia_semana, 
+h.hora_inicio, d.nombre
+FROM horarios h
+JOIN materias m ON h.id_materia = m.id_materia
+JOIN docentes d ON h.id_docente = d.id_docente
+WHERE m.nombre_materia LIKE '%Manejo de Base de Datos%';</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_5.png" alt="Evidencia Consulta 5">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box">
+                    <strong><i class="fas fa-shield-alt"></i> Defensa del Resultado:</strong>
+                    <p>Muestra correctamente que la materia está a cargo del Lic. Chamba y se dicta los días Martes y Jueves a las 18:00 horas.</p>
+                </div>
+            </div>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">06</span> Materias del docente X los Lunes y Miércoles
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <p><strong>Filtro:</strong> Días Lunes o Miércoles</p>
+                        <div class="mini-code">
+<pre><code>SELECT d.nombre, m.nombre_materia, h.dia_semana
+FROM horarios h
+JOIN docentes d ON h.id_docente = d.id_docente
+JOIN materias m ON h.id_materia = m.id_materia
+WHERE d.nombre LIKE '%Karelys Arredondo%'
+AND h.dia_semana IN ('Lunes', 'Miércoles');</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_6.png" alt="Resultado Vacío">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box warning">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Defensa del Resultado:</strong>
+                    <p>El resultado es <strong>VACÍO (0 registros)</strong>. Esto es correcto porque la columna de horarios especifica explícitamente "MARTES Y JUEVES" para todas las asignaturas.</p>
+                </div>
+            </div>
+
+            <div class="query-block">
+                <div class="query-header">
+                    <span class="q-badge">07</span> Materias programadas el Miércoles
+                </div>
+                <div class="flex-row">
+                    <div class="col-left">
+                        <p><strong>Filtro:</strong> Día Miércoles</p>
+                        <div class="mini-code">
+<pre><code>SELECT m.nombre_materia, d.nombre, h.hora_inicio
+FROM horarios h
+JOIN materias m ON h.id_materia = m.id_materia
+JOIN docentes d ON h.id_docente = d.id_docente
+WHERE h.dia_semana = 'Miércoles';</code></pre>
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="result-box">
+                            <img src="../img/Deber_4_consulta_7.png" alt="Resultado Vacío">
+                        </div>
+                    </div>
+                </div>
+                <div class="defense-box warning">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Defensa del Resultado:</strong>
+                    <p>El resultado es <strong>VACÍO</strong>. Según la imagen del horario proporcionado, ninguna materia tiene horas clase asignadas para el día miércoles.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="text-center" style="padding: 20px; color: #718096; font-size: 0.9rem;">
+        <p>Desarrollo de Software - Base de Datos</p>
+    </footer>
+
+</body>
+</html>

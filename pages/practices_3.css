@@ -1,0 +1,217 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS PARA EL DEBER 4
+   ========================================= */
+
+/* Variables locales para este estilo de documento */
+:root {
+    --header-bg: #2c5282; /* Azul corporativo */
+    --header-border: #ecc94b; /* Dorado */
+    --bg-body: #f7fafc; 
+    --bg-container: #ffffff; 
+    --card-blue: #4299e1;
+    --text-dark: #2d3748;
+    --text-light: #718096;
+    --code-bg: #1a202c;
+    --code-text: #e2e8f0;
+    --defense-bg: #fffaf0;
+    --defense-border: #ed8936;
+}
+
+body {
+    background-color: var(--bg-body); 
+    color: var(--text-dark);
+}
+
+/* Header Ajustado */
+.main-header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid var(--header-border);
+    margin-bottom: 50px;
+}
+
+.main-header h1 { font-size: 2.2rem; font-weight: 700; margin: 0; }
+.main-header p { margin-top: 5px; font-size: 1.1rem; opacity: 0.9; }
+
+
+/* =========================================
+   AJUSTE DE IMAGEN HORARIO
+   ========================================= */
+.schedule-img {
+    /* Limita el ancho al 85% del contenedor para que no se vea gigante */
+    max-width: 85%; 
+    
+    /* IMPORTANTE: height: auto mantiene la proporción original 
+       para que la imagen no se vea aplastada ni estirada */
+    height: auto;   
+    
+    /* Centra la imagen horizontalmente */
+    display: block;
+    margin: 20px auto; 
+    
+    /* Estética opcional: bordes redondeados y sombra */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* En pantallas pequeñas (celulares), permitimos que ocupe todo el ancho */
+@media (max-width: 768px) {
+    .schedule-img {
+        max-width: 100%;
+    }
+}
+/* Botón Volver */
+.btn-back {
+    position: absolute;
+    top: 20px; left: 20px;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.btn-back:hover { background: rgba(255,255,255,0.4); }
+
+/* Contenedor tipo "Hoja" */
+.main-container {
+    max-width: 1100px;
+    margin: -50px auto 0;
+    background-color: var(--bg-container);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Títulos de Sección */
+.section-title {
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    display: flex; align-items: center; gap: 10px;
+}
+.section-title i { color: var(--header-bg); }
+.section-intro { margin-bottom: 30px; color: var(--text-light); }
+
+/* Tarjetas Informativas */
+.info-card {
+    background: #fff;
+    border-left: 5px solid var(--card-blue);
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+.info-card h3 { font-size: 1.1rem; color: var(--header-bg); margin-bottom: 10px; }
+
+/* Utilidades Layout */
+.flex-row { display: flex; gap: 30px; margin-bottom: 20px; align-items: flex-start; }
+.col-left { flex: 1; }
+.col-right { flex: 1; }
+.text-center { text-align: center; }
+.mb-20 { margin-bottom: 20px; }
+.mt-10 { margin-top: 10px; }
+
+/* Ventana de Código Grande */
+.code-window {
+    background: var(--code-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    color: var(--code-text);
+}
+.code-header {
+    background: #2d3748;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-bottom: 1px solid #4a5568;
+}
+pre {
+    padding: 15px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Bloques de Consulta Específicos */
+.query-block {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+.query-header {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--header-bg);
+    display: flex; align-items: center; gap: 10px;
+}
+.q-badge {
+    background: var(--header-bg);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Código pequeño dentro de las consultas */
+.mini-code pre {
+    background: #2d3748;
+    color: #edf2f7;
+    border-radius: 4px;
+    padding: 10px;
+    border-left: 3px solid var(--header-border);
+    margin-top: 5px;
+}
+
+/* Caja de Resultados (Imágenes) */
+.result-box {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    text-align: center;
+}
+.result-box h4 { margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light); }
+.result-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.border-img { border: 1px solid #cbd5e0; }
+
+/* Caja de Defensa */
+.defense-box {
+    background-color: var(--defense-bg);
+    border-left: 4px solid #48bb78; /* Verde éxito */
+    padding: 15px;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.95rem;
+    color: #2d3748;
+    margin-top: 15px;
+}
+.defense-box.warning {
+    border-left-color: var(--defense-border); /* Naranja */
+    background-color: #fffbf0;
+}
+.defense-box strong { display: block; margin-bottom: 5px; color: #2c5282; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .flex-row { flex-direction: column; }
+    .main-container { margin: 0; border-radius: 0; padding: 20px; }
+}

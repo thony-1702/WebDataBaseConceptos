@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 1: Procedimientos Almacenados</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css"> 
+    <link rel="stylesheet" href="leccion_1.css">
+</head>
+<body>
+
+    <header class="main-header">
+         <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+        <div class="header-content">
+            <h1><i class="fas fa-cogs"></i> Lección 1</h1>
+            <p>Procedimientos Almacenados en MySQL (Stored Procedures)</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <section class="doc-section">
+            <h2 class="section-title"><i class="fas fa-book-reader"></i> 1. Fundamentos Teóricos</h2>
+            
+            <div class="theory-grid">
+                <div class="info-card card-blue">
+                    <h3>¿Qué son?</h3>
+                    <p>Un Procedimiento Almacenado es un conjunto de instrucciones SQL que se guardan en el servidor de base de datos con un nombre. En lugar de escribir la consulta una y otra vez, simplemente "llamamos" al procedimiento para que se ejecute.</p>
+                </div>
+                
+                <div class="info-card card-green">
+                    <h3>Ventajas Principales</h3>
+                    <ul class="check-list">
+                        <li><i class="fas fa-check"></i> <strong>Rendimiento:</strong> Se compilan una vez y se ejecutan rápido.</li>
+                        <li><i class="fas fa-check"></i> <strong>Seguridad:</strong> Evitan la inyección SQL y controlan accesos.</li>
+                        <li><i class="fas fa-check"></i> <strong>Reutilización:</strong> Escribes el código una vez, lo usas muchas veces.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-window">
+                <div class="code-header">Sintaxis Básica de Creación</div>
+<pre><code class="language-sql">
+DELIMITER //
+CREATE PROCEDURE nombre_procedimiento (IN parametro TIPO)
+BEGIN
+    -- Instrucciones SQL (SELECT, INSERT, UPDATE...)
+END //
+DELIMITER ;
+</code></pre>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2 class="section-title"><i class="fas fa-database"></i> 2. Base de Datos de Prueba</h2>
+            <p>Para esta actividad, se creó una tabla llamada <strong>'productos'</strong> simulando el inventario de una tienda de tecnología con 10 registros iniciales.</p>
+
+            <div class="flex-row">
+                <div class="col-left">
+                    <div class="mini-code">
+                        <p><strong>Estructura de la Tabla:</strong></p>
+<pre><code>CREATE TABLE productos (
+  id_producto INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100),
+  categoria VARCHAR(50),
+  precio DECIMAL(10, 2),
+  stock INT
+);</code></pre>
+                    </div>
+                </div>
+                <div class="col-right">
+                    <div class="result-box">
+                        <p><strong>Evidencia de Registros:</strong></p>
+                        <img src="../img/sp_evidencia_tabla.png" alt="Tabla Productos">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2 class="section-title"><i class="fas fa-list-ol"></i> 3. Creación y Ejecución de Procedimientos</h2>
+            <p class="section-intro">A continuación, se documentan 10 procedimientos almacenados con diferentes utilidades (CRUD, Cálculos, Búsquedas).</p>
+
+            <div class="procedures-grid">
+                
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">01</span> Insertar Producto</div>
+                    <p class="sp-desc">Recibe datos y crea un nuevo registro.</p>
+                    <pre class="sp-code"><code>CALL sp_insertar_producto('Webcam HD', 'Accesorios', 35.00, 15);</code></pre>
+                    <img src="../img/evidencia_sp1.png" class="sp-img" alt="Evidencia SP 1">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">02</span> Listar Todo</div>
+                    <p class="sp-desc">Muestra el inventario completo.</p>
+                    <pre class="sp-code"><code>CALL sp_listar_todo();</code></pre>
+                    <img src="../img/evidencia_sp2.png" class="sp-img" alt="Evidencia SP 2">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">03</span> Actualizar Precio</div>
+                    <p class="sp-desc">Modifica el precio de un producto por ID.</p>
+                    <pre class="sp-code"><code>CALL sp_actualizar_precio(1, 799.99);</code></pre>
+                    <img src="../img/evidencia_sp3.png" class="sp-img" alt="Evidencia SP 3">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">04</span> Eliminar Producto</div>
+                    <p class="sp-desc">Borra un registro según su ID.</p>
+                    <pre class="sp-code"><code>CALL sp_eliminar_producto(10);</code></pre>
+                    <img src="../img/evidencia_sp4.png" class="sp-img" alt="Evidencia SP 4">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">05</span> Buscar Categoría</div>
+                    <p class="sp-desc">Filtra productos (Ej: 'Laptops').</p>
+                    <pre class="sp-code"><code>CALL sp_buscar_categoria('Laptops');</code></pre>
+                    <img src="../img/evidencia_sp5.png" class="sp-img" alt="Evidencia SP 5">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">06</span> Contar Total</div>
+                    <p class="sp-desc">Devuelve la cantidad de ítems.</p>
+                    <pre class="sp-code"><code>CALL sp_contar_productos();</code></pre>
+                    <img src="../img/evidencia_sp6.png" class="sp-img" alt="Evidencia SP 6">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">07</span> Consultar Stock</div>
+                    <p class="sp-desc">Muestra cuanto stock hay de un ID.</p>
+                    <pre class="sp-code"><code>CALL sp_consultar_stock(2);</code></pre>
+                    <img src="../img/evidencia_sp7.png" class="sp-img" alt="Evidencia SP 7">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">08</span> Stock Bajo</div>
+                    <p class="sp-desc">Alerta productos con < 10 unidades.</p>
+                    <pre class="sp-code"><code>CALL sp_stock_bajo();</code></pre>
+                    <img src="../img/evidencia_sp8.png" class="sp-img" alt="Evidencia SP 8">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">09</span> Valor Inventario</div>
+                    <p class="sp-desc">Suma total de dinero en mercadería.</p>
+                    <pre class="sp-code"><code>CALL sp_valor_inventario();</code></pre>
+                    <img src="../img/evidencia_sp9.png" class="sp-img" alt="Evidencia SP 9">
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-header"><span class="sp-badge">10</span> Búsqueda Parcial</div>
+                    <p class="sp-desc">Busca por texto (Ej: productos 'Samsung').</p>
+                    <pre class="sp-code"><code>CALL sp_buscar_nombre('Samsung');</code></pre>
+                    <img src="../img/evidencia_sp10.png" class="sp-img" alt="Evidencia SP 10">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2 class="section-title"><i class="fas fa-file-code"></i> 4. Script SQL Completo</h2>
+            <p>Código fuente utilizado para generar la tabla y los 10 procedimientos.</p>
+            <div class="code-window">
+<pre><code class="language-sql">
+-- SCRIPT DE LA ACTIVIDAD: PROCEDIMIENTOS ALMACENADOS
+
+CREATE TABLE productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100), categoria VARCHAR(50),
+    precio DECIMAL(10, 2), stock INT
+);
+
+-- INSERT INTO productos (nombre, categoria, precio, stock) VALUES
+('Laptop HP', 'Laptops', 750.00, 10),
+('Mouse Logitech', 'Accesorios', 25.50, 50),
+('Teclado Mecánico', 'Accesorios', 60.00, 30),
+('Monitor Samsung 24"', 'Monitores', 180.00, 15),
+('Procesador Intel i7', 'Componentes', 320.00, 8),
+('Memoria RAM 16GB', 'Componentes', 85.00, 20),
+('Disco SSD 1TB', 'Almacenamiento', 90.00, 25),
+('Impresora Epson', 'Impresoras', 210.00, 5),
+('Tablet Samsung', 'Tablets', 250.00, 12),
+('Auriculares Sony', 'Audio', 45.00, 40);
+
+DELIMITER //
+
+CREATE PROCEDURE sp_insertar_producto(IN p_nombre VARCHAR(100), IN p_cat VARCHAR(50), IN p_precio DECIMAL(10,2), IN p_stock INT)
+BEGIN
+    INSERT INTO productos (nombre, categoria, precio, stock) VALUES (p_nombre, p_cat, p_precio, p_stock);
+END //
+
+CREATE PROCEDURE sp_listar_todo()
+BEGIN
+    SELECT * FROM productos;
+END //
+
+CREATE PROCEDURE sp_actualizar_precio(IN p_id INT, IN p_nuevo_precio DECIMAL(10,2))
+BEGIN
+    UPDATE productos SET precio = p_nuevo_precio WHERE id_producto = p_id;
+END //
+
+CREATE PROCEDURE sp_eliminar_producto(IN p_id INT)
+BEGIN
+    DELETE FROM productos WHERE id_producto = p_id;
+END //
+
+CREATE PROCEDURE sp_buscar_categoria(IN p_categoria VARCHAR(50))
+BEGIN
+    SELECT * FROM productos WHERE categoria = p_categoria;
+END //
+
+CREATE PROCEDURE sp_contar_productos()
+BEGIN
+    SELECT COUNT(*) AS total_productos FROM productos;
+END //
+
+CREATE PROCEDURE sp_consultar_stock(IN p_id INT)
+BEGIN
+    SELECT nombre, stock FROM productos WHERE id_producto = p_id;
+END //
+
+CREATE PROCEDURE sp_stock_bajo()
+BEGIN
+    SELECT * FROM productos WHERE stock < 10;
+END //
+
+CREATE PROCEDURE sp_valor_inventario()
+BEGIN
+    SELECT SUM(precio * stock) AS valor_total_almacen FROM productos;
+END //
+
+CREATE PROCEDURE sp_buscar_nombre(IN p_texto VARCHAR(50))
+BEGIN
+    SELECT * FROM productos WHERE nombre LIKE CONCAT('%', p_texto, '%');
+END //
+
+DELIMITER ;
+</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center" style="padding: 20px; color: #718096;">
+        <p>Lección 1 - Base de Datos Avanzada</p>
+    </footer>
+
+</body>
+</html>
